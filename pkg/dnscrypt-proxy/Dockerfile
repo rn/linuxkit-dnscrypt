@@ -4,7 +4,7 @@ RUN apk add --no-cache go git musl-dev
 
 ENV GOPATH=/go PATH=$PATH:/go/bin
 ENV GITREPO=github.com/jedisct1/dnscrypt-proxy
-ENV COMMIT=2.0.10
+ENV COMMIT=2.0.11
 
 RUN go get -d ${GITREPO}/dnscrypt-proxy && \
     cd /go/src/${GITREPO} && \
