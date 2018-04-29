@@ -11,3 +11,8 @@ endif
 dnscrypt-proxy:
 	linuxkit pkg build -dev -org dnscrypt pkg/dnscrypt-proxy
 	linuxkit build -format $(DNSCRYPT_FORMAT) -name dnscrypt-proxy dnscrypt-proxy-$(ARCH).yml
+
+
+.PHONY: run
+run:
+	linuxkit run -publish 2222:22/tcp -publish 10053:53/tcp -publish 10053:53/udp dnscrypt-proxy
