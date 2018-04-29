@@ -29,9 +29,14 @@ services:
     image: linuxkit/openntpd:v0.3
   - name: dhcpcd2
     image: linuxkit/dhcpcd:v0.3
+  - name: sshd
+    image: linuxkit/sshd:v0.3
   - name: dnscrypt-proxy
     image: dnscrypt/dnscrypt-proxy:dev
-files:    
+files:
+  - path: root/.ssh/authorized_keys
+    source: ~/.ssh/id_rsa.pub
+    mode: "0600"
   - path: var/log/dnsproxy
     directory: true
   - path: etc/linuxkit-config
