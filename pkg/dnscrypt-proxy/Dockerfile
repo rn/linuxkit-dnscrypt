@@ -33,7 +33,6 @@ WORKDIR /
 COPY --from=rootfs /out /
 COPY --from=build /dnscrypt-proxy /usr/bin/dnscrypt-proxy
 COPY --from=blacklist /dnscrypt-blacklist.txt /etc/dnscrypt-blacklist.txt
-COPY /resolv.conf /etc/resolv.conf
 COPY /dnscrypt-proxy.toml /etc/dnscrypt-proxy.toml
 COPY /dnscrypt-whitelist.txt /etc/dnscrypt-whitelist.txt
 
