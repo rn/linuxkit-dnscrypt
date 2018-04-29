@@ -1,0 +1,6 @@
+*.img
+*.tar
+*.swp
+*-kernel
+*-cmdline
+*-state
