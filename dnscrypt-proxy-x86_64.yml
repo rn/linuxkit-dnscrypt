@@ -9,6 +9,9 @@ init:
 onboot:
   - name: sysctl
     image: linuxkit/sysctl:v0.3
+  - name: usbstorage
+    image: linuxkit/modprobe:v0.3
+    command: ["modprobe", "usb_storage"]
   - name: dhcpcd
     image: linuxkit/dhcpcd:v0.3
     command: ["/sbin/dhcpcd", "--nobackground", "-f", "/dhcpcd.conf", "-1"]
