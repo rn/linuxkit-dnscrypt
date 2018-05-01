@@ -8,10 +8,13 @@ DNSCRYPT_FORMAT = rpi3
 endif
 
 .PHONY: dnscrypt-proxy
-dnscrypt-proxy:
-	linuxkit pkg build -dev -org dnscrypt pkg/dnscrypt-proxy
+dnscrypt-proxy: pkgs
+	linuxkit pkg build -dev -org local pkg/dnscrypt-proxy
 	linuxkit build -format $(DNSCRYPT_FORMAT) -name dnscrypt-proxy dnscrypt-proxy-$(ARCH).yml
 
+.PHONY: pkgs
+pkgs:
+	make -C pkg OPTIONS="-dev -org local" build
 
 .PHONY: run
 run:
