@@ -41,7 +41,7 @@ services:
   - name: sshd
     image: linuxkit/sshd:v0.3
   - name: dnscrypt-proxy
-    image: dnscrypt/dnscrypt-proxy:dev
+    image: local/dnscrypt-proxy:dev
 files:
   - path: root/.ssh/authorized_keys
     source: ~/.ssh/id_rsa.pub

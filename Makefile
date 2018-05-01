@@ -9,7 +9,7 @@ endif
 
 .PHONY: dnscrypt-proxy
 dnscrypt-proxy:
-	linuxkit pkg build -dev -org dnscrypt pkg/dnscrypt-proxy
+	linuxkit pkg build -dev -org local pkg/dnscrypt-proxy
 	linuxkit build -format $(DNSCRYPT_FORMAT) -name dnscrypt-proxy dnscrypt-proxy-$(ARCH).yml
 
 
