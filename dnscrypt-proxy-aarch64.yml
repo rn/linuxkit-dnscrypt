@@ -18,18 +18,8 @@ onboot:
   - name: dhcpcd
     image: linuxkit/dhcpcd:v0.3
     command: ["/sbin/dhcpcd", "--nobackground", "-f", "/dhcpcd.conf", "-1"]
-  - name: ntp-oneshot
-    # Use the busybox 'ntpd' to force set the time.
-    image: library/alpine:3.7
-    command: ["ntpd", "-d", "-n", "-q", "-p", "pool.ntp.org"]
-    capabilities:
-      - CAP_SYS_TIME
-      - CAP_SYS_NICE
-      - CAP_SYS_CHROOT
-      - CAP_SETUID
-      - CAP_SETGID
-    binds:
-      - /etc/resolv.conf:/etc/resolv.conf
+  - name: ntp-one-shot
+    image: local/ntp-one-shot:dev
 services:
   - name: getty
     image: linuxkit/getty:v0.3
