@@ -1,10 +1,10 @@
-FROM linuxkit/alpine:f3cd219615428b2bd943411723eb28875275fae7 as build
+FROM golang:1.13.8-alpine as build
 
 RUN apk add --no-cache go git musl-dev
 
 ENV GOPATH=/go PATH=$PATH:/go/bin
-ENV GITREPO=github.com/jedisct1/dnscrypt-proxy
-ENV COMMIT=2.0.11
+ENV GITREPO=github.com/DNSCrypt/dnscrypt-proxy
+ENV COMMIT=2.0.39
 
 RUN go get -d ${GITREPO}/dnscrypt-proxy && \
     cd /go/src/${GITREPO} && \
@@ -13,14 +13,14 @@ RUN go get -d ${GITREPO}/dnscrypt-proxy && \
 
 # Generating the blacklist requites python2 which we don't have in linuxkit/alpine
 FROM alpine:3.7 as blacklist
-ENV GITREPO=github.com/jedisct1/dnscrypt-proxy
+ENV GITREPO=github.com/DNSCrypt/dnscrypt-proxy
 COPY --from=build /go/src/${GITREPO}/ /dnscrypt-proxy/
 RUN apk update && apk add python
 RUN cd /dnscrypt-proxy/utils/generate-domains-blacklists && \
     python generate-domains-blacklist.py > /dnscrypt-blacklist.txt
 
 # This is for the root fs. Not really needed, but handy for debug
-FROM linuxkit/alpine:f3cd219615428b2bd943411723eb28875275fae7 AS rootfs
+FROM linuxkit/alpine:5fd4e83fea8bd04f21d1611d04c93d6ccaca785a AS rootfs
 RUN mkdir -p /out/etc/apk && cp -r /etc/apk/* /out/etc/apk/
 RUN apk add --no-cache --initdb -p /out \
     alpine-baselayout \
