@@ -2,37 +2,37 @@ kernel:
   image: linuxkit/kernel:4.14.38
   cmdline: "console=tty0 console=ttyAMA0"
 init:
-  - linuxkit/init:v0.3
-  - linuxkit/runc:v0.3
-  - linuxkit/containerd:v0.3
-  - linuxkit/ca-certificates:v0.3
+  - linuxkit/init:a4fcf333298f644dfac6adf680b83140927aa85e
+  - linuxkit/runc:69b4a35eaa22eba4990ee52cccc8f48f6c08ed03
+  - linuxkit/containerd:09553963ed9da626c25cf8acdf6d62ec37645412
+  - linuxkit/ca-certificates:v0.7
 onboot:
   - name: sysctl
-    image: linuxkit/sysctl:v0.3
+    image: linuxkit/sysctl:v0.7
   - name: netdev
-    image: linuxkit/modprobe:v0.3
+    image: linuxkit/modprobe:v0.7
     command: ["modprobe", "smsc95xx"]
   - name: usbstorage
-    image: linuxkit/modprobe:v0.3
+    image: linuxkit/modprobe:v0.7
     command: ["modprobe", "usb_storage"]
   - name: dhcpcd
-    image: linuxkit/dhcpcd:v0.3
+    image: linuxkit/dhcpcd:v0.7
     command: ["/sbin/dhcpcd", "--nobackground", "-f", "/dhcpcd.conf", "-1"]
   - name: ntp-one-shot
     image: local/ntp-one-shot:dev
 services:
   - name: getty
-    image: linuxkit/getty:v0.3
+    image: linuxkit/getty:v0.7
     env:
      - INSECURE=true
   - name: rngd
-    image: linuxkit/rngd:v0.3
+    image: linuxkit/rngd:02c555b50cd1887aa628836662d2eec54c0d7e81
   - name: ntpd
-    image: linuxkit/openntpd:v0.3
+    image: linuxkit/openntpd:v0.7
   - name: dhcpcd2
-    image: linuxkit/dhcpcd:v0.3
+    image: linuxkit/dhcpcd:v0.7
   - name: sshd
-    image: linuxkit/sshd:v0.3
+    image: linuxkit/sshd:v0.7
   - name: dnscrypt-proxy
     image: local/dnscrypt-proxy:dev
 files:
